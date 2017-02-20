@@ -1,5 +1,13 @@
-#yea img {
+
+.selectCharacters img {
 	float: left;
-	height: 100px;
-	width: 100px;
+	height: 300px;
+	width: 300px;
+    margin-left: 20px;
+    border: 2px solid red;
+
+}
+
+.clicked {
+    background-color: yellow;
 }

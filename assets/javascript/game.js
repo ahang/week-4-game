@@ -1,7 +1,6 @@
 //Execute after DOM is ready
 $(document).ready(function() {
     var playerCharacter;
-    var img = new Image();
     // var playerChar;
     // var enemyCharacter;
     // var player1;
@@ -11,7 +10,9 @@ $(document).ready(function() {
 
     // var win = 0;
     // var lose = 0;
-    var charactersArchetype = function(name, attack, hitpoints, pic) {
+
+    var charactersAttr = function(id, name, attack, hitpoints, pic) {
+        this.id = id;
         this.name = name;
         this.attack = attack;
         this.hitpoints = hitpoints;
@@ -19,84 +20,12 @@ $(document).ready(function() {
     }
 
     var fighter = [
-        new charactersArchetype("Ryu", 50, 50, '<img src="assets/images/portrait1.jpg">'),
-        new charactersArchetype("Ken", 100, 100, '<img src="assets/images/portrait2.png">')
+        new charactersAttr(1, "Aang", 50, 1000, '<img src="assets/images/Aang.png">'),
+        new charactersAttr(2, "Zuko", 100, 100, '<img src="assets/images/Korra.png">'),
+        new charactersAttr(3, "Korra", 50, 1000, '<img src="assets/images/Aang.png">'),
+        new charactersAttr(4, "Appa", 50, 1000, '<img src="assets/images/Korra.png">')
     ];
-
-    console.log(fighter[1]);
-    for (var i = 0; i < fighter.length; i++) {
-        console.log("This is working");
-        var coolStuff = $("<div>");
-        coolStuff.html(fighter[i].pic);
-        console.log(fighter[i].pic);
-        $("#yea").append(coolStuff);
-        console.log(fighter[0]);
-        console.log(fighter[1]);
-    }
-    //     characterOne: {
-    //         "name": "Ryu",
-    //         "pic": img.src = "assets/images/portrait1.jpg",
-    //         "health": 100,
-    //         "attack": 20
-    //     },
-    //     characterTwo: {
-    //         "name": "Ryu",
-    //         "pic": "assets/images/portrait1.jpg",
-    //         "health": 100,
-    //         "attack": 20
-    //     },
-    //     characterThree: {
-    //         "name": "Ryu",
-    //         "pic": "assets/images/portrait1.jpg",
-    //         "health": 100,
-    //         "attack": 20
-    //     },
-    //     characterFour: {
-    //         "name": "Ryu",
-    //         "pic": "assets/images/portrait1.jpg",
-    //         "health": 100,
-    //         "attack": 20
-    //     }
-    // }
-    // console.log(characters.characterOne);
-
-    // var characters = {
-    //     player1: {
-    //         "name": "Woo",
-    //         "pic": "assets/images/",
-    //         "health": 5,
-    //         "attack": 5,
-    //     }
-    //     player2: {
-    //         "name": "Yea",
-    //         "pic": "assets/images/",
-    //         "health": 10,
-    //         "attack": 10,
-    //     }
-    //     player3: {
-    //         "name": "Someone",
-    //         "pic": "assets/images/",
-    //         "health": 10,
-    //         "attack": 10,
-    //     }
-    //     player4: {
-    //         "name": "Agapor",
-    //         "pic": "assets/images/",
-    //         "health": 20,
-    //         "attack": 21,
-    //     }
-    // }
-//Maybe dive into constructors
-// function character(name, health, attack) {
-//     this.name = name; 
-//     this.health = health; 
-//     this.attack = attack;
-//     return this;
-// }
-// console.log(player1);
-// console.log(player4.name);
-// console.log(player4.health);
-// console.log("Enemy attack is " + player4.attack);
+    // console.log(fighter[1]);
 
 //Set Global Variables for playerCharacter, enemyCharacter, win counter? lose counter?,
 //Game Object for all characters
@@ -108,15 +37,37 @@ $(document).ready(function() {
 //
 
 //Set up the start of the game
-    function startGame() {
+    function initializeGame() {
+        //loops through the available fighters and appends them onto the selectCharacter div
+        //
+        for (var i = 0; i < fighter.length; i++) {
+            console.log("This loop is starting");
+            var selectDiv = $("<div>");
+            selectDiv.addClass("btn charSelect"); //add the button class for each character
+            console.log("You are now a button");
+            selectDiv.html(fighter[i].pic);
+            console.log(fighter[i].pic); //checking
+
+            $(".selectCharacters").append(selectDiv); //appends a div inbetween the selectCharacters html div
+
+            console.log("Appended character: " + fighter[i].name);
+        }
+        console.log("Completed Initializing");
 
     }
+
+initializeGame();
+
+$(".charSelect").on("click", function() {
+    console.log(fighter[0].name + " I've been clicked");
+    $(this).toggleClass("clicked");
+});
 
 //Have the user Selects the character
 //Applies character to the selected character and applies enemy class to the unchosen character
 
     function selectCharacter() {
-        $()
+
     }
 
 //Have the user selects one of the enemy character
@@ -137,4 +88,4 @@ $(document).ready(function() {
 
 
 
-})
+});
