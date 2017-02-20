@@ -1,6 +1,10 @@
 //Execute after DOM is ready
 $(document).ready(function() {
     var playerCharacter;
+    var enemyCharacter;
+    var selectedCharacter = false;
+    var selectedDefender = false;
+
     // var playerChar;
     // var enemyCharacter;
     // var player1;
@@ -11,6 +15,7 @@ $(document).ready(function() {
     // var win = 0;
     // var lose = 0;
 
+    //set constructor charactersAttribute
     var charactersAttr = function(id, name, attack, hitpoints, pic) {
         this.id = id;
         this.name = name;
@@ -18,12 +23,12 @@ $(document).ready(function() {
         this.hitpoints = hitpoints;
         this.pic = pic;
     }
-
+    //setup the fighters in an object array
     var fighter = [
         new charactersAttr(1, "Aang", 50, 1000, '<img src="assets/images/Aang.png">'),
-        new charactersAttr(2, "Zuko", 100, 100, '<img src="assets/images/Korra.png">'),
-        new charactersAttr(3, "Korra", 50, 1000, '<img src="assets/images/Aang.png">'),
-        new charactersAttr(4, "Appa", 50, 1000, '<img src="assets/images/Korra.png">')
+        new charactersAttr(2, "Zuko", 100, 100, '<img src="assets/images/Zuko.png">'),
+        new charactersAttr(3, "Katara", 50, 1000, '<img src="assets/images/Katara.png">'),
+        new charactersAttr(4, "Sokka", 50, 1000, '<img src="assets/images/Toph.png">')
     ];
     // console.log(fighter[1]);
 
@@ -43,8 +48,8 @@ $(document).ready(function() {
         for (var i = 0; i < fighter.length; i++) {
             console.log("This loop is starting");
             var selectDiv = $("<div>");
-            selectDiv.addClass("btn charSelect"); //add the button class for each character
-            console.log("You are now a button");
+            selectDiv.addClass("btn charSelect"); //add the btn class/charSelect for each character
+            console.log(fighter[i].name + " You are now a button");
             selectDiv.html(fighter[i].pic);
             console.log(fighter[i].pic); //checking
 
@@ -59,8 +64,29 @@ $(document).ready(function() {
 initializeGame();
 
 $(".charSelect").on("click", function() {
-    console.log(fighter[0].name + " I've been clicked");
-    $(this).toggleClass("clicked");
+    //$(this).toggleClass("clicked"); //test to see if each char gets clicked
+    //IF statement to check if the playerSelected the character.
+    if (!selectedCharacter) {
+        playerCharacter = $(this).attr("div");
+        $(".playerCharacter").append(this);
+        $(this).addClass("player");
+        console.log("You have selected a character");
+        selectedCharacter = true;
+    } //Checking to see if Defender has been selected yet
+    else if (!selectedDefender && selectedCharacter !== playerCharacter) {
+        enemyCharacter = $(this).attr("div");
+        $(".enemyCharacters").append(this);
+        console.log("You have selected an opponent");
+        selectedDefender = true;
+    }
+    // var movePlayer = $("<div>");
+    // movePlayer.addClass("playerChar");
+    // movePlayer.removeClass("charSelect");
+    // $(".playerCharacter").appendTo($(this));
+    // $(".playerCharacter").append(movePlayer);
+    // $(".charSelect").children().appendTo(".enemyCharacters");
+
+
 });
 
 //Have the user Selects the character

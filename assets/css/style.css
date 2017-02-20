@@ -1,13 +1,35 @@
-
-.selectCharacters img {
-	float: left;
-	height: 300px;
-	width: 300px;
-    margin-left: 20px;
+body {
+    background: url(../images/bg.png);
+}
+img {
+    height: 250px;
+    width: 250px;
     border: 2px solid red;
-
 }
 
 .clicked {
     background-color: yellow;
+}
+
+.selectCharacters {
+    border: 2px solid black;
+}
+
+.playerCharacter {
+    border: 2px solid blue;
+    align-content: center;
+}
+
+.player img,
+.enemyCharacters img {
+    margin: auto;
+    vertical-align: middle;
+}
+
+.enemyCharacters {
+    border: 2px solid orange;
+}
+
+.fight h1 {
+    text-align: center;
 }
