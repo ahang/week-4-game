@@ -1,15 +1,23 @@
 body {
     background: url(../images/bg.png);
+    font-size: 20px;
 }
+
 img {
     height: 250px;
     width: 250px;
-    border: 2px solid red;
+/*    border: 2px solid red; */
+
 }
 
-.clicked {
-    background-color: yellow;
+.action-bar {
+    text-align: center;
+    padding-top: 4.5%;
 }
+
+/*.clicked {
+    background-color: yellow;
+}*/
 
 .selectCharacters {
     border: 2px solid black;
@@ -17,19 +25,19 @@ img {
 
 .playerCharacter {
     border: 2px solid blue;
-    align-content: center;
-}
-
-.player img,
-.enemyCharacters img {
+    display: block;
     margin: auto;
-    vertical-align: middle;
+
 }
 
 .enemyCharacters {
     border: 2px solid orange;
 }
+.col-md-6 {
+    border: 2px solid black;
+    height: 400px;
+}
 
-.fight h1 {
+.combat-log {
     text-align: center;
 }
