@@ -77,16 +77,15 @@ initializeGame();
         $(".charSelect").on("click", function() {
         //$(this).toggleClass("clicked"); //test to see if each char gets clicked
         //IF statement to check if the playerSelected the character.
-            if (!selectedCharacter) {
-                playerCharacter = $(this).attr("div");
+            if (selectedCharacter === false) {
                 $(".playerCharacter").append(this);
                 $(this).addClass("player");
                 console.log("You have selected a character");
                 selectedCharacter = true;
+                $(this).prop("onclick", null).off("click"); //locks the char in place
                 $(".action-bar").html("Choose your opponent!");
             } //Checking to see if Defender has been selected yet
-            else if (!selectDefender && selectedCharacter !== $(this).attr("div")) {
-                enemyCharacter = $(this).attr("div");
+            else if (selectDefender === false && selectedCharacter === true ) {
                 $(".enemyCharacters").append(this);
                 $(this).addClass("opponent");
                 console.log("You have selected an opponent");
