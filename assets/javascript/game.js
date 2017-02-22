@@ -146,11 +146,12 @@ initializeGame();
                     enemyHealth -= playerAtk;
                     enemyHealthText.text(enemyHealth + ' / ' + enemyHealthTotal);
                     $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
-                    var increaseATK = parseInt(playerAtk, 10);
-                    var numberATK = (increaseATK + 2);
+                    playerATK = parseInt(playerAtk, 10);
+                    console.log("The type of increaseATK " + typeof playerAtk);
+                    var numberATK = (playerATK + 2);
                     var stringATK = numberATK.toString();
                     console.log("This is stringATK " + stringATK);
-                    console.log("This is increaseATK " + increaseATK);
+                    console.log("This is increaseATK " + playerATK);
                     console.log("This is numberATK " + numberATK);
                     console.log("The type of increaseATK " + typeof playerAtk);
                 } //checks to see if enemyHealth is greater than 0 and playerHealth greater than 0.
