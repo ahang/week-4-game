@@ -85,6 +85,7 @@ $(document).ready(function() {
         combat();
         //reset(); ~~Needs Fixing Broken TODO
         console.log("Completed Initializing");
+        reset();
 
     }
 
@@ -118,6 +119,7 @@ initializeGame();
                 enemyAtk = $(this).attr("attack")
                 console.log("You have selected an opponent");
                 selectDefender = true;
+                $(this).prop("onclick", null).off("click");
                 $(".action-bar").html("Click attack to fight your opponent");
             }
         });
@@ -129,24 +131,39 @@ initializeGame();
     function combat() {
         $(".attack").on("click", function() {
             console.log("I am attacking");
+            playerHealthText = $(".player").children("h4");
+            enemyHealthText = $(".opponent").children("h4");
 
             if (!selectedCharacter) {
                 $(".combat-log").html("Please select a character");
             } else if(!selectDefender) {
                 $(".combat-log").html("Please select an opponent");
             } else if (selectedCharacter && selectDefender) {
-                if (playerHealth > 0) {
+                //Checks to see if Player and Enemy Health is great than 0.
+                //If it meets then allows player to attack
+                if (playerHealth > 0 && enemyHealth > 0) {
                     enemyHealth -= playerAtk;
+                    enemyHealthText.text(enemyHealth + ' / ' + enemyHealthTotal);
                     $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
-
+                } //checks to see if enemyHealth is greater than 0 and playerHealth greater than 0.
+                //If it meets then allow enemy player to counterAttack
+                if (enemyHealth > 0 && playerHealth > 0) {
+                    playerHealth -= enemyAtk;
+                    playerHealthText.text(playerHealth + " / " + playerHealthTotal);
+                    $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
+                } if (playerHealth <= 0) {
+                    playerHealth = 0;
+                    $(".combat-log").append("<br> Game Over. Hit reset to try again!");
                 } if (enemyHealth <= 0) {
-                    $(".combat-log").html("Choose your next opponent");
+                    enemyHealth = 0;
+                    $(".opponent").empty();
+                    $(".combat-log").append("<br> Select another opponent!");
+                    selectDefender = false;
+                    selectCharacter();
                 }
             }
-
-        })
-
-    }
+    });
+}
 
                     // playerHealth -= enemyAtk;
                     // $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
