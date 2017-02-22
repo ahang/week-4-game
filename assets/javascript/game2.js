@@ -152,10 +152,10 @@ initializeGame();
                     $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
                     //console.log(parseInt(playerAtk, 10));
                 } if (playerHealth <= 0) {
-                    player.hitpoints = 0;
+                    playerHealthText.text(0 + " / " + playerHealthTotal);
                     $(".combat-log").append("<br> Game Over. Hit reset to try again!");
                 } if (enemyHealth <= 0) {
-                    enemyHealth = 0;
+                    enemyHealthText.text(0 + " / " + playerHealthTotal);
                     $(".opponent").empty();
                     $(".combat-log").append("<br> Select another opponent!");
                     selectDefender = false;
