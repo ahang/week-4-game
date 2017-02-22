@@ -1,9 +1,19 @@
 //Execute after DOM is ready
 $(document).ready(function() {
-    var playerCharacter;
+    var playerName;
+    var playerHealth;
+    var playerHealthTotal;
+    var playerHealthText;
+    var playerAtk;
+    var enemyName;
+    var enemyHealth;
+    var enemyHealthTotal;
+    var enemyHealthText
+    var enemyAtk;
     var enemyCharacter;
     var selectedCharacter = false;
     var selectDefender = false;
+    var round = 0;
 
     // var playerChar;
     // var enemyCharacter;
@@ -24,12 +34,12 @@ $(document).ready(function() {
     }
     //setup the fighters in an object array
     var fighter = [
-        new charactersAttr("Aang", 20, 180, '<img src="assets/images/Aang.png">'),
+        new charactersAttr("Aang", 20, 180,'<img src="assets/images/Aang.png">'),
         new charactersAttr("Zuko", 25, 150, '<img src="assets/images/Zuko.png">'),
         new charactersAttr("Katara", 18, 175, '<img src="assets/images/Katara.png">'),
         new charactersAttr("Toph", 17, 200, '<img src="assets/images/Toph.png">')
     ];
-    // console.log(fighter[1]);
+    //console.log(fighter[1]);
 
 //Set Global Variables for playerCharacter, enemyCharacter, win counter? lose counter?,
 //Game Object for all characters
@@ -42,19 +52,29 @@ $(document).ready(function() {
 
 //Set up the start of the game
     function initializeGame() {
-        playerCharacter;
-        enemyCharacter;
-        selectedCharacter = false;
-        selectDefender = false;
-        //loops through the available fighters and appends them onto the selectCharacter div
+        //The Tons of Fun loop
         for (var i = 0; i < fighter.length; i++) {
-            console.log("This loop is starting");
+            //Create a div for each available fighters
+        console.log("This loop is starting");
             var selectDiv = $("<div>");
             selectDiv.addClass("btn charSelect text-center"); //add the btn class/charSelect for each character
+            selectDiv.attr("name", fighter[i].name); //Add Name attr
+            selectDiv.attr("hp", fighter[i].hitpoints); //Add Hp attr
+            selectDiv.attr("attack", fighter[i].attack); //Add atk attribute
+            selectDiv.append(fighter[i].pic); //Appends the picture
             console.log(fighter[i].name + " You are now a button");
-            selectDiv.html(fighter[i].pic + "<br>" + fighter[i].name + "<br>HP: " + fighter[i].hitpoints +
-                "<br>Attack: " + fighter[i].attack);
-            console.log(fighter[i].pic); //checking
+
+            var name = $("<h3>");
+            name.text(fighter[i].name); //Apending Name
+            selectDiv.append(name);
+
+            var valueHP = $("<h4>");
+            valueHP.text("HP: " + fighter[i].hitpoints + " / " + fighter[i].hitpoints); //Appending HP Value
+            selectDiv.append(valueHP);
+
+            var atkPower = $("<h5>");
+            atkPower.text("AP: " + fighter[i].attack); //Appending Atk Power
+            selectDiv.append(atkPower);
 
             $(".selectCharacters").append(selectDiv); //appends a div inbetween the selectCharacters html div
 
@@ -62,8 +82,8 @@ $(document).ready(function() {
         }
         $(".action-bar").html("Choose a character");
         selectCharacter();
-        attack();
-        reset();
+        combat();
+        //reset(); ~~Needs Fixing Broken TODO
         console.log("Completed Initializing");
 
     }
@@ -83,11 +103,19 @@ initializeGame();
                 console.log("You have selected a character");
                 selectedCharacter = true;
                 $(this).prop("onclick", null).off("click"); //locks the char in place
+                playerName = $(this).attr("name");
+                playerHealth = $(this).attr("hp");
+                playerHealthTotal = playerHealth;
+                playerAtk = $(this).attr("attack");
                 $(".action-bar").html("Choose your opponent!");
             } //Checking to see if Defender has been selected yet
             else if (selectDefender === false && selectedCharacter === true ) {
                 $(".enemyCharacters").append(this);
                 $(this).addClass("opponent");
+                enemyName = $(this).attr("name");
+                enemyHealth = $(this).attr("hp");
+                enemyHealthTotal = enemyHealth;
+                enemyAtk = $(this).attr("attack")
                 console.log("You have selected an opponent");
                 selectDefender = true;
                 $(".action-bar").html("Click attack to fight your opponent");
@@ -95,38 +123,38 @@ initializeGame();
         });
     }
 
-    function combatInfo() {
-
-
-    }
-
-//Have the user selects one of the enemy character
-//This will move the character to the defender field
-    function enemyCharacters() {
-
-    }
-
 //This will allow the user to attack once the enemyCharacter is in the defender field
 //Checks to make sure the character has been selected and the defender has been selected before
 //allowing the user to hit the attack button
-    function attack() {
+    function combat() {
         $(".attack").on("click", function() {
             console.log("I am attacking");
+
             if (!selectedCharacter) {
                 $(".combat-log").html("Please select a character");
             } else if(!selectDefender) {
                 $(".combat-log").html("Please select an opponent");
             } else if (selectedCharacter && selectDefender) {
-                $(".combat-log").html("I am attacking");
+                if (playerHealth > 0) {
+                    enemyHealth -= playerAtk;
+                    $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
+
+                } if (enemyHealth <= 0) {
+                    $(".combat-log").html("Choose your next opponent");
+                }
             }
+
         })
 
     }
+
+                    // playerHealth -= enemyAtk;
+                    // $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
 //resetting
     function reset() {
         $(".reset").on("click", function() {
             console.log("I am trying to reset");
-            initializeGame();
+
         })
     }
 
