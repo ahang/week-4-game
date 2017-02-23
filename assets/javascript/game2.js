@@ -141,14 +141,14 @@ initializeGame();
                 //If it meets then allows player to attack
                 if (playerHealth > 0 && enemyHealth > 0) {
                     enemyHealth -= playerAtk;
-                    enemyHealthText.text(enemyHealth + ' / ' + enemyHealthTotal);
+                    enemyHealthText.text("HP: " + enemyHealth + ' / ' + enemyHealthTotal);
                     $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
                     playerAtk += 4;
                 } //checks to see if enemyHealth is greater than 0 and playerHealth greater than 0.
                 //If it meets then allow enemy player to counterAttack
                 if (enemyHealth > 0 && playerHealth > 0) {
                     playerHealth -= enemyAtk;
-                    playerHealthText.text(playerHealth + " / " + playerHealthTotal);
+                    playerHealthText.text("HP: " + playerHealth + " / " + playerHealthTotal);
                     $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
                     //console.log(parseInt(playerAtk, 10));
                 } if (playerHealth <= 0) {
