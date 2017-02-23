@@ -72,8 +72,8 @@ $(document).ready(function() {
             valueHP.text("HP: " + fighter[i].hitpoints + " / " + fighter[i].hitpoints); //Appending HP Value
             selectDiv.append(valueHP);
 
-            var atkPower = $("<h5>");
-            atkPower.text("AP: " + fighter[i].attack); //Appending Atk Power
+            var atkPower = $("<h4>");
+            atkPower.text("Initial AP: " + fighter[i].attack); //Appending Atk Power
             selectDiv.append(atkPower);
 
             $(".selectCharacters").append(selectDiv); //appends a div inbetween the selectCharacters html div

@@ -1,6 +1,13 @@
 body {
     background: url(../images/bg.png);
-    font-size: 20px;
+    font-size: 25px;
+}
+
+.banner {
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    color: border-left: ;
+
 }
 
 img {
@@ -20,25 +27,25 @@ img {
 }*/
 
 .selectCharacters {
-    border: 2px solid black;
+/*    border: 2px solid black;*/
     text-align: center;
+    height: 325px;
 }
 
 .playerCharacter {
-    border: 2px solid blue;
+/*    border: 2px solid blue;*/
     display: block;
     margin: auto;
-
+    height: 325px;
 }
 
 .enemyCharacters {
-    border: 2px solid orange;
-}
-.col-md-6 {
-    border: 2px solid black;
-    height: 400px;
+/*    border: 2px solid orange;*/
+    height: 325px;
 }
 
 .combat-log {
     text-align: center;
+    border: 2px solid black;
+    height: 100px;
 }

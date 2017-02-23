@@ -60,7 +60,7 @@ $(document).ready(function() {
             fighterButton.append(valueHP);
 
             var atkPower = $("<h5>");
-            atkPower.text("AP: " + fighter.attack); //Appending Atk Power
+            atkPower.text("Base AP: " + fighter.attack); //Appending Atk Power
             fighterButton.append(atkPower);
 
             $(".selectCharacters").append(fighterButton);
