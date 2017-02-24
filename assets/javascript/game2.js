@@ -72,7 +72,7 @@ $(document).ready(function() {
         selectCharacter();
         combat();
         $(".combat-log").text("");
-        console.log("Completed Initializing");
+        //console.log("Completed Initializing");
         reset();
 
     }
@@ -100,9 +100,9 @@ initializeGame();
                 playerHealthTotal = playerHealth;
                 playerAtk = player.attack; //fighter attack
                 //Checking~
-                console.log(playerAtk);
-                console.log(playerHealth);
-                console.log(playerName);
+                //console.log(playerAtk);
+                //console.log(playerHealth);
+                //console.log(playerName);
                 $(".action-bar").html("Choose your opponent!");
             } //Checking to see if Defender has been selected yet
             //If defender has not allow player to select the defender and add opponent class and move it to the correct
@@ -116,10 +116,10 @@ initializeGame();
                 enemyHealth = opponent.hitpoints;
                 enemyHealthTotal = enemyHealth;
                 enemyAtk = opponent.attack;
-                console.log(enemyName);
-                console.log(enemyHealth);
-                console.log(enemyAtk);
-                console.log("You have selected an opponent");
+                //console.log(enemyName);
+                //console.log(enemyHealth);
+                //console.log(enemyAtk);
+                //console.log("You have selected an opponent");
                 selectDefender = true;
                 $(this).prop("onclick", null).off("click");
                 $(".action-bar").html(playerName + " vs " + enemyName);
@@ -133,7 +133,7 @@ initializeGame();
 //allowing the user to hit the attack button
     function combat() {
         $(".attack").on("click", function() {
-            console.log("I am attacking");
+            //console.log("I am attacking");
             playerHealthText = $(".player").children("h4");
             enemyHealthText = $(".opponent").children("h4");
 
@@ -151,7 +151,7 @@ initializeGame();
                     var randomNumber = Math.floor(Math.random() * 5); //random chance of gaining more attack each click
                     //This adds a random element to the RPG!!
                     playerAtk += randomNumber;
-                    console.log(randomNumber);
+                    //console.log(randomNumber);
                 } //checks to see if enemyHealth is greater than 0 and playerHealth greater than 0.
                 //If it meets then allow enemy player to counterAttack
                 if (enemyHealth > 0 && playerHealth > 0) {
@@ -177,7 +177,7 @@ initializeGame();
 //resetting the game
     function reset() {
         $(".reset").on("click", function() {
-            console.log("I am trying to reset");
+            //console.log("I am trying to reset");
             selectedCharacter = false;
             selectDefender = false;
             $(".charSelect").remove();
