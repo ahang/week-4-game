@@ -26,9 +26,9 @@ $(document).ready(function() {
     //setup the fighters in an object array
     var fighters = [
         new Fighter("Aang", 14, 180,'<img src="assets/images/Aang.png">'),
-        new Fighter("Zuko", 15, 150, '<img src="assets/images/Zuko.png">'),
+        new Fighter("Zuko", 15, 150, '<img src="assets/images/zuko.png">'),
         new Fighter("Katara", 12, 175, '<img src="assets/images/Katara.png">'),
-        new Fighter("Toph", 10, 200, '<img src="assets/images/Toph.png">')
+        new Fighter("Toph", 10, 200, '<img src="assets/images/toph.png">')
     ];
     //console.log(fighter[1]);
 
