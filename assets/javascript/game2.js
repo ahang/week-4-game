@@ -148,7 +148,7 @@ initializeGame();
                     enemyHealth -= playerAtk;
                     enemyHealthText.text("HP: " + enemyHealth + ' / ' + enemyHealthTotal);
                     $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
-                    var randomNumber = Math.floor(Math.random() * 5); //random chance of gaining more attack each click
+                    var randomNumber = Math.floor(Math.random() * 10); //random chance of gaining more attack each click
                     //This adds a random element to the RPG!!
                     playerAtk += randomNumber;
                     //console.log(randomNumber);
