@@ -1,20 +1,30 @@
 body {
-    background: url(../images/bg.png);
+    background: url(../images/bg2.png);
     font-size: 25px;
+    font-weight: 100px;
+    color: black;
+    font-family: 'Chewy', cursive;
+
 }
 
-.banner {
+.banner, .action-bar {
     font-family: 'Permanent Marker', cursive;
     text-align: center;
-    color: border-left: ;
-
+    color: white;
+    margin: 0 auto;
+    padding: auto;
 }
 
 img {
     height: 200px;
     width: 200px;
 /*    border: 2px solid red; */
+}
 
+.btn h3, h4, h5 {
+    font-size: 30px;
+    color: #302013;
+    font-weight: bolder;
 }
 
 .action-bar {
@@ -25,11 +35,15 @@ img {
 /*.clicked {
     background-color: yellow;
 }*/
+.charSelect {
+    font-size: 125px;
+}
 
 .selectCharacters {
 /*    border: 2px solid black;*/
     text-align: center;
     height: 325px;
+    font-size: 40px;
 }
 
 .playerCharacter {
@@ -45,7 +59,13 @@ img {
 }
 
 .combat-log {
+    padding-top: 20px;
     text-align: center;
-    border: 2px solid black;
-    height: 100px;
+    border: 2px solid red;
+    background-color: white;
+    height: 150px;
+}
+
+.button-row {
+    text-align: center;
 }

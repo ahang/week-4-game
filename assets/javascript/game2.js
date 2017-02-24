@@ -1,5 +1,6 @@
 //Execute after DOM is ready
 $(document).ready(function() {
+    //Global variables
     var playerName;
     var playerHealth;
     var playerHealthTotal;
@@ -13,7 +14,7 @@ $(document).ready(function() {
     var enemyCharacter;
     var selectedCharacter = false;
     var selectDefender = false;
-    var round = 0;
+
 
     //set constructor charactersAttribute
     function Fighter (name, attack, hitpoints, pic) {
@@ -24,10 +25,10 @@ $(document).ready(function() {
     }
     //setup the fighters in an object array
     var fighters = [
-        new Fighter("Aang", 20, 180,'<img src="assets/images/Aang.png">'),
-        new Fighter("Zuko", 25, 150, '<img src="assets/images/Zuko.png">'),
-        new Fighter("Katara", 18, 175, '<img src="assets/images/Katara.png">'),
-        new Fighter("Toph", 17, 200, '<img src="assets/images/Toph.png">')
+        new Fighter("Aang", 13, 180,'<img src="assets/images/Aang.png">'),
+        new Fighter("Zuko", 15, 150, '<img src="assets/images/Zuko.png">'),
+        new Fighter("Katara", 11, 175, '<img src="assets/images/Katara.png">'),
+        new Fighter("Toph", 8, 200, '<img src="assets/images/Toph.png">')
     ];
     //console.log(fighter[1]);
 
@@ -46,9 +47,10 @@ $(document).ready(function() {
         //appends the picture to the screen with the associated name/hp/attack value
         fighters.forEach (function (fighter, index) {
             var fighterButton = $("<div>");
-
+            //adds the follow class and adds data index so that can be tracked
             fighterButton.addClass("btn charSelect text-center");
             fighterButton.data("fighterId", index);
+            //append the picture to the fighterButton
             fighterButton.append(fighter.pic);
 
             var name = $("<h3>");
@@ -62,7 +64,7 @@ $(document).ready(function() {
             var atkPower = $("<h5>");
             atkPower.text("Base AP: " + fighter.attack); //Appending Atk Power
             fighterButton.append(atkPower);
-
+            //putting it all together!
             $(".selectCharacters").append(fighterButton);
         })
 
@@ -85,7 +87,7 @@ initializeGame();
         //$(this).toggleClass("clicked"); //test to see if each char gets clicked
         //IF statement to check if the playerSelected the character.
             if (selectedCharacter === false) {
-                $(".playerCharacter").append(this);
+                $(".playerCharacter").html(this);
                 $(this).addClass("player");
                 $(this).removeClass("charSelect");
                 console.log("You have selected a character");
@@ -95,7 +97,7 @@ initializeGame();
                 var player = fighters[fighterId]; //set the player to pull the fighters array information
                 playerName = player.name; //fighter name
                 playerHealth = player.hitpoints; //fighter hp
-                playerHealthTotal = playerHealth; 
+                playerHealthTotal = playerHealth;
                 playerAtk = player.attack; //fighter attack
                 //Checking~
                 console.log(playerAtk);
@@ -103,8 +105,10 @@ initializeGame();
                 console.log(playerName);
                 $(".action-bar").html("Choose your opponent!");
             } //Checking to see if Defender has been selected yet
+            //If defender has not allow player to select the defender and add opponent class and move it to the correct
+            //div. Also update the actionbar text to show who the player selected and to proceed to the attacking phase!
             else if (selectDefender === false && selectedCharacter === true ) {
-                $(".enemyCharacters").append(this);
+                $(".enemyCharacters").html(this);
                 $(this).addClass("opponent");
                 var opponentId = $(this).data("fighterId");
                 var opponent = fighters[opponentId];
@@ -118,7 +122,8 @@ initializeGame();
                 console.log("You have selected an opponent");
                 selectDefender = true;
                 $(this).prop("onclick", null).off("click");
-                $(".action-bar").html("Click attack to fight your opponent");
+                $(".action-bar").html(playerName + " vs " + enemyName);
+                $(".action-bar").append("<br> Click attack to fight your opponent");
             }
         });
     }
@@ -143,7 +148,10 @@ initializeGame();
                     enemyHealth -= playerAtk;
                     enemyHealthText.text("HP: " + enemyHealth + ' / ' + enemyHealthTotal);
                     $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
-                    playerAtk += 4;
+                    var randomNumber = Math.floor(Math.random() * 5); //random chance of gaining more attack each click
+                    //This adds a random element to the RPG!!
+                    playerAtk += randomNumber;
+                    console.log(randomNumber);
                 } //checks to see if enemyHealth is greater than 0 and playerHealth greater than 0.
                 //If it meets then allow enemy player to counterAttack
                 if (enemyHealth > 0 && playerHealth > 0) {
@@ -151,12 +159,14 @@ initializeGame();
                     playerHealthText.text("HP: " + playerHealth + " / " + playerHealthTotal);
                     $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
                     //console.log(parseInt(playerAtk, 10));
-                } if (playerHealth <= 0) {
+                } //checks to see if playerHealth is less then 0. If its 0 then game over!
+                if (playerHealth <= 0) {
                     playerHealthText.text(0 + " / " + playerHealthTotal);
-                    $(".combat-log").append("<br> Game Over. Hit reset to try again!");
-                } if (enemyHealth <= 0) {
+                    $(".combat-log").html("<br> Game Over. Hit reset to try again!");
+                } //checks to see if enemyHealth is less than 0. If it is allow player to choose new character
+                if (enemyHealth <= 0) {
                     enemyHealthText.text(0 + " / " + playerHealthTotal);
-                    $(".opponent").empty();
+                    $(".combat-log").append("<br> You defeated " + enemyName + "!");
                     $(".combat-log").append("<br> Select another opponent!");
                     selectDefender = false;
                     selectCharacter();
@@ -180,4 +190,3 @@ initializeGame();
 
 });
 
-    
