@@ -190,16 +190,17 @@ function winCondition() {
 //resetting the game
     function reset() {
         $(".reset").on("click", function() {
-            location.reload();
-            // console.log("I am trying to reset");
-            // selectedCharacter = false;
-            // selectDefender = false;
-            // count = 0;
-            // $(".charSelect").remove();
-            // $(".playerCharacter").empty();
-            // $(".enemyCharacters").empty();
-            // $(".combat-log").empty("");
-            // initializeGame();
+            playerAtk = 0;
+            console.log("I am trying to reset");
+            selectedCharacter = false;
+            selectDefender = false;
+            count = 0;
+            combat();
+            $(".charSelect").remove();
+            $(".playerCharacter").empty();
+            $(".enemyCharacters").empty();
+            $(".combat-log").empty("");
+            initializeGame();
         })
     }
 
