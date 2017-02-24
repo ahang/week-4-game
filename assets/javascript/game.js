@@ -71,10 +71,8 @@ $(document).ready(function() {
 
         $(".action-bar").html("Choose a character");
         selectCharacter();
-        combat();
         $(".combat-log").text("");
         //console.log("Completed Initializing");
-        reset();
 
     }
 
@@ -129,53 +127,55 @@ initializeGame();
         });
     }
 
-//This will allow the user to attack once the enemyCharacter is in the defender field
-//Checks to make sure the character has been selected and the defender has been selected before
-//allowing the user to hit the attack button
-    function combat() {
-        $(".attack").on("click", function() {
-            //console.log("I am attacking");
-            playerHealthText = $(".player").children("h4");
-            enemyHealthText = $(".opponent").children("h4");
 
-            if (!selectedCharacter) {
-                $(".combat-log").html("Please select a character");
-            } else if(!selectDefender) {
-                $(".combat-log").html("Please select an opponent");
-            } else if (selectedCharacter && selectDefender) {
-                //Checks to see if Player and Enemy Health is greater than 0.
-                //If it meets then allows player to attack
-                    if (playerHealth > 0 && enemyHealth > 0) {
-                        enemyHealth -= playerAtk;
-                        enemyHealthText.text("HP: " + enemyHealth + ' / ' + enemyHealthTotal);
-                        $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
-                        var randomNumber = Math.floor(Math.random() * 7); //random chance of gaining more attack each click
-                        //This adds a random element to the RPG!!
-                        playerAtk += randomNumber;
-                        //console.log(randomNumber);
-                    } //checks to see if enemyHealth is greater than 0 and playerHealth greater than 0.
-                    //If it meets then allow enemy player to counterAttack
-                    if (enemyHealth > 0 && playerHealth > 0) {
-                        playerHealth -= enemyAtk;
-                        playerHealthText.text("HP: " + playerHealth + " / " + playerHealthTotal);
-                        $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
-                        //console.log(parseInt(playerAtk, 10));
-                    } //checks to see if playerHealth is less then 0. If its 0 then game over!
-                    if (playerHealth <= 0) {
-                        playerHealthText.text(0 + " / " + playerHealthTotal);
-                        $(".combat-log").html("<br> Game Over. Hit reset to try again!");
-                    } //checks to see if enemyHealth is less than 0. If it is allow player to choose new character
-                    if (enemyHealth <= 0 && count < 3) {
-                        enemyHealthText.text(0 + " / " + playerHealthTotal);
-                        $(".combat-log").append("<br> You defeated " + enemyName + "!");
-                        $(".combat-log").append("<br> Select another opponent!");
-                        count++;
-                        //Check for winCondition
-                        winCondition();
-                    }
-                }
+    $(".attack").on("click", function() {
+        combat();
     });
-}
+
+    function combat() {
+        playerHealthText = $(".player").children("h4");
+        enemyHealthText = $(".opponent").children("h4");
+    //This will allow the user to attack once the enemyCharacter is in the defender field
+    //Checks to make sure the character has been selected and the defender has been selected before
+    //allowing the user to hit the attack button
+        if (!selectedCharacter) {
+            $(".combat-log").html("Please select a character");
+        } else if(!selectDefender) {
+            $(".combat-log").html("Please select an opponent");
+        } else if (selectedCharacter && selectDefender) {
+            //Checks to see if Player and Enemy Health is greater than 0.
+            //If it meets then allows player to attack
+                if (playerHealth > 0 && enemyHealth > 0) {
+                    enemyHealth -= playerAtk;
+                    enemyHealthText.text("HP: " + enemyHealth + ' / ' + enemyHealthTotal);
+                    $(".combat-log").text(playerName + " deals " + playerAtk + " damage to " + enemyName + "." );
+                    var randomNumber = Math.floor(Math.random() * 7); //random chance of gaining more attack each click
+                    //This adds a random element to the RPG!!
+                    playerAtk += randomNumber;
+                    console.log(playerAtk);
+                    //console.log(randomNumber);
+                } //checks to see if enemyHealth is greater than 0 and playerHealth greater than 0.
+                //If it meets then allow enemy player to counterAttack
+                if (enemyHealth > 0 && playerHealth > 0) {
+                    playerHealth -= enemyAtk;
+                    playerHealthText.text("HP: " + playerHealth + " / " + playerHealthTotal);
+                    $(".combat-log").append("<br>" + enemyName + " counters and attacks " + playerName + " dealing " + enemyAtk + " damage.");
+                    //console.log(parseInt(playerAtk, 10));
+                } //checks to see if playerHealth is less then 0. If its 0 then game over!
+                if (playerHealth <= 0) {
+                    playerHealthText.text(0 + " / " + playerHealthTotal);
+                    $(".combat-log").html("<br> Game Over. Hit reset to try again!");
+                } //checks to see if enemyHealth is less than 0. If it is allow player to choose new character
+                if (enemyHealth <= 0 && count < 3) {
+                    enemyHealthText.text(0 + " / " + playerHealthTotal);
+                    $(".combat-log").append("<br> You defeated " + enemyName + "!");
+                    $(".combat-log").append("<br> Select another opponent!");
+                    count++;
+                    //Check for winCondition
+                    winCondition();
+                }
+            }
+    }
 
 function winCondition() {
     if (count === 3) {
@@ -188,21 +188,21 @@ function winCondition() {
 }
 
 //resetting the game
+    $(".reset").on("click", function() {
+        reset();
+    })
+
     function reset() {
-        $(".reset").on("click", function() {
-            playerAtk = 0;
-            console.log("I am trying to reset");
-            selectedCharacter = false;
-            selectDefender = false;
-            count = 0;
-            combat();
-            $(".charSelect").remove();
-            $(".playerCharacter").empty();
-            $(".enemyCharacters").empty();
-            $(".combat-log").empty("");
-            initializeGame();
-        })
+        // console.log("I am trying to reset");
+        selectedCharacter = false;
+        selectDefender = false;
+        count = 0;
+        combat();
+        $(".charSelect").remove();
+        $(".playerCharacter").empty();
+        $(".enemyCharacters").empty();
+        $(".combat-log").empty("");
+        initializeGame();
     }
 
 });
-
