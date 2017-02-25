@@ -9,9 +9,8 @@ $(document).ready(function() {
     var enemyName;
     var enemyHealth;
     var enemyHealthTotal;
-    var enemyHealthText
+    var enemyHealthText;
     var enemyAtk;
-    var enemyCharacter;
     var selectedCharacter = false;
     var selectDefender = false;
     var count = 0;
@@ -67,7 +66,7 @@ $(document).ready(function() {
             fighterButton.append(atkPower);
             //putting it all together!
             $(".selectCharacters").append(fighterButton);
-        })
+        });
 
         $(".action-bar").html("Choose a character");
         selectCharacter();
@@ -203,7 +202,7 @@ function winCondition() {
 //on click function for reset button
     $(".reset").on("click", function() {
         reset();
-    })
+    });
 
 
 
